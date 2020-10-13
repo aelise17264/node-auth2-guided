@@ -2,6 +2,8 @@ const bcryptjs = require("bcryptjs");
 const jwt = require('jsonwebtoken')
 const router = require("express").Router();
 
+const config = require('../api/config')
+
 const Users = require("../users/users-model.js");
 const { isValid } = require("../users/users-service.js");
 
@@ -63,14 +65,13 @@ const payload = {
   role: user.role
 }
 
-const jwtSecret = 'now it is out, may the ghost have pity on me!'
 
 const jwtOptions = {
   expiresIn: '8h',
 
 }
 
-return jwt.sign(payload, jwtSecret, jwtOptions)
+return jwt.sign(payload, config.jwtSecret, jwtOptions)
 }
 
 
